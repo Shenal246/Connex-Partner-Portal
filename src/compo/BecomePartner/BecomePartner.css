@@ -1,0 +1,99 @@
+.directorDetails {
+    /* margin-top: 50px !important; */
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group1 {
+    margin-bottom: 15px;
+    margin-left: 100px;
+}
+
+.text-danger {
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+.topic {
+    text-align: left;
+    margin-top: 100px;
+}
+
+.contentfields {
+    margin-top: 30px;
+}
+
+.btton {
+    margin-left: 200px;
+    margin-top: 20px;
+}
+
+.btn-group {
+    margin-left: 20px;
+    width: 100px;
+}
+
+.heading {
+    margin-left: 100px;
+}
+
+
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.signup-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.signup-button {
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+    text-transform: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: #115293;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.signup-link {
+    color: #1976d2;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+    color: #115293;
+}
+
+.BecomePageLogo {
+    width: 200px;
+    text-align: center !important;
+    left: 200px;
+
+}
