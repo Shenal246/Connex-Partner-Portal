@@ -37,6 +37,7 @@ import TechImage from './compo/img/coming soon/4.webp';
 import MDFImage from './compo/img/coming soon/5.webp';
 import ConnexCircleImage from './compo/img/coming soon/2.webp';
 import SettingsImage from './compo/img/coming soon/3.webp';
+import AccessMgt from './compo/page/AccessMgt';
 
 const themeColors = {
   primary: '#333333',
@@ -350,6 +351,7 @@ const AppContent = () => {
             <Route path="/techalliance" element={<PrivateRoute><TechAlliance /></PrivateRoute>} />
             <Route path="/mdf" element={<PrivateRoute><MDFOrders /></PrivateRoute>} />
             <Route path="/connexcircle" element={<PrivateRoute><ConnexCircle /></PrivateRoute>} />
+            <Route path="/partner-access-management" element={<PrivateRoute><AccessMgt /></PrivateRoute>} />
             {/* <Route path="/settings" element={<PrivateRoute><SettingsPage /></PrivateRoute>} /> */}
             {/* Add other routes here */}
           </Routes>

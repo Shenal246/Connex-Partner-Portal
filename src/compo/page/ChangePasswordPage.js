@@ -15,7 +15,7 @@ const ChangePasswordPage = () => {
     const [userId, setUserId] = useState(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('tempToken');
         if (token) {
             try {
                 const decodedToken = jwtDecode(token);

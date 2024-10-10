@@ -114,7 +114,7 @@ const LoginPage = () => {
       if (response.status === 200) {
         if (response.data.firstLogin) {
           Swal.fire('Welcome!', 'Please change your password.', 'info');
-          localStorage.setItem('token', response.data.tempToken); // Store the token
+          localStorage.setItem('tempToken', response.data.tempToken); // Store the token
           navigate('/change-password'); // Redirect to change password form
         } else {
           Swal.fire('Success!', 'Logged in successfully!', 'success');

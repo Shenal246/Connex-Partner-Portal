@@ -1,6 +1,6 @@
 // src/compo/Sidebar.js
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, List, ListItem, ListItemIcon, ListItemText, Divider, Typography } from '@mui/material';
 import {
   Dashboard,
@@ -21,10 +21,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import BuildIcon from '@mui/icons-material/Build';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import TripOriginIcon from '@mui/icons-material/TripOrigin';
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
-import LogoImage from './img/CONNEX png.png';
+import LogoImage from './img/ConnexIT.png';
 import CopyrightLogo from './img/image.png'; // Import your company logo
+import axios from 'axios';
+import APIConnection from '../config';
 
 // Define theme colors with a modern look
 const themeColors = {
@@ -39,7 +42,7 @@ const themeColors = {
 
 // Define styled components
 const SidebarContainer = styled(Box)(({ theme }) => ({
-  width: '200px', // Fixed width
+  width: '220px', // Fixed width
   height: '100vh', // Full height
   background: themeColors.sidebarBg, // Sidebar background gradient
   color: themeColors.buttonText, // Text color
@@ -132,58 +135,81 @@ const CopyrightLogoStyled = styled('img')({
   },
 });
 
-// Navigation items array
-const navItems = [
-  { text: 'Home', icon: <HomeIcon />, path: '/dashboard' },
-  { text: 'Product', icon: <ProductIcon />, path: '/product' },
-  { text: 'Promotion', icon: <PromotionIcon />, path: '/promotion' },
-  { text: 'Deal Registration', icon: <DealRegistrationIcon />, path: '/deal-registration' },
-  { text: 'Events & Videos', icon: <EventsIcon />, path: '/ctb' },
-  { text: 'Tech Alliance', icon: <BuildIcon />, path: '/techalliance' },
-  { text: 'MDF Orders', icon: <CurrencyExchangeIcon />, path: '/mdf' },
-  { text: 'Connex Circle', icon: <TripOriginIcon />, path: '/connexcircle' },
-  // { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
-];
 
 // Sidebar component
-const Sidebar = () => (
-  <SidebarContainer>
-    <LogoContainer>
-      <LogoImageStyled src={LogoImage} alt="Logo" />
-    </LogoContainer>
-    <Divider sx={{ bgcolor: themeColors.borderColor }} />
-    <Typography
-      variant="subtitle1"
-      sx={{
-        textAlign: 'center',
-        fontWeight: 500,
-        color: themeColors.buttonText,
-        py: 1,
-        fontSize: '13px',
-        fontFamily: "'Roboto', sans-serif",
-      }}
-    >
-      Partner Services
-    </Typography>
-    <Divider sx={{ bgcolor: themeColors.borderColor }} />
-    <List>
-      {navItems.map((item, index) => (
-        <StyledListItem
-          button
-          component={item.path ? Link : 'div'}
-          to={item.path || undefined}
-          key={index}
-        >
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </StyledListItem>
-      ))}
-    </List>
-    <Divider sx={{ bgcolor: themeColors.borderColor }} />
-    <CopyrightContainer>
-      <CopyrightLogoStyled src={CopyrightLogo} alt="Company Logo" />
-    </CopyrightContainer>
-  </SidebarContainer>
-);
+const Sidebar = () => {
+
+  const [privileges, setPrivileges] = useState([]);
+  const getPrivilegesApi = APIConnection.getPrivileges;
+
+  useEffect(() => {
+    const getPrivilegesFunction = async () => {
+      try {
+        const response = await axios.get(getPrivilegesApi, { withCredentials: true });
+        setPrivileges(response.data.Privileges);
+      } catch (error) {
+        console.error('Error fetching privileges:', error);
+      }
+    };
+
+    getPrivilegesFunction();
+  }, []);
+
+  const hasPrivilege = (privilege) => privileges.includes(privilege);
+
+  // Navigation items array
+  const navItems = [
+    { text: 'Home', icon: <HomeIcon />, path: '/dashboard', privilege: 'Partner - Dashboard' },
+    { text: 'Product', icon: <ProductIcon />, path: '/product', privilege: 'Partner - Product' },
+    { text: 'Promotion', icon: <PromotionIcon />, path: '/promotion', privilege: 'Partner - Promotion' },
+    { text: 'Deal Registration', icon: <DealRegistrationIcon />, path: '/deal-registration', privilege: 'Partner - Deal Registration' },
+    { text: 'Events & Videos', icon: <EventsIcon />, path: '/ctb', privilege: 'Partner - Events & Videos' },
+    { text: 'Tech Alliance', icon: <BuildIcon />, path: '/techalliance', privilege: 'Partner - Tech Alliance' },
+    { text: 'MDF Orders', icon: <CurrencyExchangeIcon />, path: '/mdf', privilege: 'Partner - MDF Orders' },
+    { text: 'Connex Circle', icon: <TripOriginIcon />, path: '/connexcircle', privilege: 'Partner - Connex Circle' },
+    { text: 'Access Control', icon: <VpnKeyIcon />, path: '/partner-access-management', privilege: 'Partner - Access Management' },
+    // { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  ];
+
+  return (
+    <SidebarContainer>
+      <LogoContainer>
+        <LogoImageStyled src={LogoImage} alt="Logo" sx={{ padding: '10px' }} />
+      </LogoContainer>
+      <Divider sx={{ bgcolor: themeColors.borderColor }} />
+      <Typography
+        variant="subtitle1"
+        sx={{
+          textAlign: 'center',
+          fontWeight: 500,
+          color: themeColors.buttonText,
+          py: 1,
+          fontSize: '13px',
+          fontFamily: "'Roboto', sans-serif",
+        }}
+      >
+        Partner Services
+      </Typography>
+      <Divider sx={{ bgcolor: themeColors.borderColor }} />
+      <List>
+        {navItems.filter(item => hasPrivilege(item.privilege)).map((item, index) => (
+          <StyledListItem
+            button
+            component={item.path ? Link : 'div'}
+            to={item.path || undefined}
+            key={index}
+          >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </StyledListItem>
+        ))}
+      </List>
+      <Divider sx={{ bgcolor: themeColors.borderColor }} />
+      <CopyrightContainer>
+        <CopyrightLogoStyled src={CopyrightLogo} alt="Company Logo" />
+      </CopyrightContainer>
+    </SidebarContainer>
+  );
+};
 
 export default Sidebar;

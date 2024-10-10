@@ -59,7 +59,7 @@ const FeaturesAndUsers = () => {
         <SectionTypography variant="h6">Users You May Know</SectionTypography>
         {companyMembers.map((user, index) => (
           <UserCard key={index}>
-            <UserImage src={bufferToBase64(user.photo)} alt={user.name} />
+            <UserImage src={`${APIConnection.backendUrl}${user.photo}`} alt={user.name} />
             <Typography variant="body1">{user.name}</Typography>
           </UserCard>
         ))}
