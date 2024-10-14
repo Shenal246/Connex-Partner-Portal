@@ -26,6 +26,9 @@ const config = {
     getpromotiondetailsapi: `${BACKEND_URL}/get-promotionsforpartner`,
     addpromotionrequestsapi: `${BACKEND_URL}/add-promotionrequest`,
     getcompanymembersapi: `${BACKEND_URL}/getpartnercompanymembersapi`,
+    getindustries: `${BACKEND_URL}/getindustries`,
+    getexpertise: `${BACKEND_URL}/getexpertise`,
+
     backendUrl:`${BACKEND_URL}`
 };
 
