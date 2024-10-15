@@ -26,10 +26,15 @@ const config = {
     getpromotiondetailsapi: `${BACKEND_URL}/get-promotionsforpartner`,
     addpromotionrequestsapi: `${BACKEND_URL}/add-promotionrequest`,
     getcompanymembersapi: `${BACKEND_URL}/getpartnercompanymembersapi`,
+    getPrivileges: `${BACKEND_URL}/getPartnerPrivileges`,
+    getCompanymembersforaccess: `${BACKEND_URL}/getcompanymembersforaccess`,
+    getpartnermodules: `${BACKEND_URL}/getpartnermodule`,
+    addMemberAPI: `${BACKEND_URL}/addnewmembertosamecompany`,
+    updateMember: `${BACKEND_URL}/updateCompanyMember`,
     getindustries: `${BACKEND_URL}/getindustries`,
     getexpertise: `${BACKEND_URL}/getexpertise`,
 
-    backendUrl:`${BACKEND_URL}`
+    backendUrl: `${BACKEND_URL}`
 };
 
 export default config;
